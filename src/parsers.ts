@@ -1,32 +1,4 @@
-interface Artist {
-  id: string;
-  images: object[];
-  name: string;
-}
-
-interface ArtistsPayload {
-  items: Artist[];
-  total: number;
-  limit: number;
-  offset: number;
-}
-
-interface Track {
-  album: {
-    album_type: string;
-    artists: object[];
-    images: object[];
-  };
-  id: string;
-  name: string;
-}
-
-interface TracksPayload {
-  items: Track[];
-  total: number;
-  limit: number;
-  offset: number;
-}
+import { ArtistsPayload, Artist, TracksPayload, Track } from "./types";
 
 export const parseArtists = (data: ArtistsPayload) => {
   const artists = data.items;
@@ -35,6 +7,7 @@ export const parseArtists = (data: ArtistsPayload) => {
     id: artist.id,
     name: artist.name,
     images: artist.images,
+    genres: artist.genres,
   }));
 
   return {
