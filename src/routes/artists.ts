@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import axios from "axios";
+import qs from "qs";
 
 import { parseArtists } from "../parsers";
 
@@ -15,9 +16,13 @@ router.get("/", async (req: Request, res: Response) => {
     Authorization: `Bearer ${token}`,
   };
 
+  const timeRange = req?.query.timeRange;
+
   const { data } = await axios({
     method: "get",
-    url: "https://api.spotify.com/v1/me/top/artists",
+    url: `https://api.spotify.com/v1/me/top/artists?${qs.stringify({
+      time_range: timeRange,
+    })}`,
     headers,
   });
 

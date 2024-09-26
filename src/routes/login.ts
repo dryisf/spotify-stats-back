@@ -16,15 +16,12 @@ router.get("/", ({ query }: Request, res: Response) => {
   const scope =
     "user-read-private user-read-email user-top-read user-read-recently-played playlist-modify-public playlist-modify-private";
 
-  console.log({ clientId });
-
   return res.status(200).send({
     authorizationUrl: `https://accounts.spotify.com/authorize?${qs.stringify({
       response_type: "code",
       client_id: clientId,
       scope,
       redirect_uri: query.redirectUri,
-      state: "ffhdjgkieudosple",
     })}`,
   });
 });
