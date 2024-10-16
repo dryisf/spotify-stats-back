@@ -8,15 +8,12 @@ dotenv.config();
 const app: Express = express();
 
 const port = process.env.PORT;
+const frontUrl = process.env.FRONT_URL || "";
 
 app.use(express.json());
 
 app.use(function (req: Request, res: Response, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://spotify-stats-front-murex.vercel.app"
-  );
+  res.setHeader("Access-Control-Allow-Origin", frontUrl);
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -33,4 +30,4 @@ app.use("/artists", artists);
 
 app.use("/tracks", tracks);
 
-app.listen(port, () => console.log(`it's alive on http://localhost:${port}`));
+app.listen(port, () => console.log(`it's alive on ${frontUrl}:${port}`));
