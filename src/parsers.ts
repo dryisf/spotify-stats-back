@@ -1,22 +1,13 @@
-interface SpotifyArtist {
-  name: string;
-  images: object[];
-}
+import { ArtistsPayload, Artist, TracksPayload, Track } from "./types";
 
-interface SpotifyArtistsPayload {
-  items: SpotifyArtist[];
-  total: number;
-  limit: number;
-  offset: number;
-  previous: number;
-}
-
-export const parseArtists = (data: SpotifyArtistsPayload) => {
+export const parseArtists = (data: ArtistsPayload) => {
   const artists = data.items;
 
-  const parsedArtists = artists.map((artist: SpotifyArtist) => ({
+  const parsedArtists = artists.map((artist: Artist) => ({
+    id: artist.id,
     name: artist.name,
     images: artist.images,
+    genres: artist.genres,
   }));
 
   return {
@@ -24,6 +15,24 @@ export const parseArtists = (data: SpotifyArtistsPayload) => {
     limit: data.limit,
     total: data.total,
     offset: data.offset,
-    previous: data.previous,
+  };
+};
+
+export const parseTracks = (data: TracksPayload) => {
+  const tracks = data.items;
+
+  const parsedTracks = tracks.map((track: Track) => ({
+    id: track.id,
+    name: track.name,
+    images: track.album.images,
+    artists: track.album.artists,
+    albumType: track.album.album_type,
+  }));
+
+  return {
+    tracks: parsedTracks,
+    limit: data.limit,
+    total: data.total,
+    offset: data.offset,
   };
 };
