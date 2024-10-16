@@ -15,7 +15,7 @@ app.use(function (req: Request, res: Response, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://spotify-stats-front-lqac9bwdr-dryisfs-projects.vercel.app"
+    "https://spotify-stats-front-murex.vercel.app"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
