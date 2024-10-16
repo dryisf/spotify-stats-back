@@ -8,12 +8,11 @@ dotenv.config();
 const app: Express = express();
 
 const port = process.env.PORT;
-const frontUrl = process.env.FRONT_URL || "";
 
 app.use(express.json());
 
 app.use(function (req: Request, res: Response, next) {
-  res.setHeader("Access-Control-Allow-Origin", frontUrl);
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONT_URL || "");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -30,4 +29,4 @@ app.use("/artists", artists);
 
 app.use("/tracks", tracks);
 
-app.listen(port, () => console.log(`it's alive on ${frontUrl}:${port}`));
+app.listen(port, () => console.log(`it's alive on http://localhost:${port}`));
